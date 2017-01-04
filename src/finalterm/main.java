@@ -1,5 +1,7 @@
 package finalterm;
 import java.util.*;
+
+import javax.swing.JButton;
 import javax.swing.JTextArea;
 //import hw.MainFrames.Act;
 import java.awt.event.*;
@@ -60,7 +62,7 @@ public class main {
 		private Button p14=new Button("?");
 		private Button p15=new Button("}");
 		private Button p16=new Button("{");
-		private Button a1=new Button("0");
+		/*private Button a1=new Button("0");
 		private Button a2=new Button("9");
 		private Button a3=new Button("8");
 		private Button a4=new Button("7");
@@ -69,14 +71,19 @@ public class main {
 		private Button a7=new Button("4");
 		private Button a8=new Button("3");
 		private Button a9=new Button("2");
-		private Button a10=new Button("1"); 
+		private Button a10=new Button("1"); */
 		private Button Q1=new Button("Clear");
         private TextArea ta=new TextArea();	
+        private Panel p=new Panel();
+        private Panel pal=new Panel();
+        private Panel pal1=new Panel();
+        private JButton buttons[]=new JButton[10];
+        private String numbers[]  =new String[10];
 public MainFrame(){
 	 initComp();
 }
 private void initComp(){
-    this.setLayout(null);
+    this.setLayout(new BorderLayout(5,5));
 	this.setBackground(Color.black);
 	this.setBounds(150,150,1200,800);
 	this.setFont(new Font("標楷體", Font.BOLD, 32));
@@ -85,7 +92,45 @@ private void initComp(){
 			System.exit(0);
 }
 	});
- b0.setBounds(100,90,300,100);
+	GridLayout grid33= new GridLayout(5,2);
+	p.setLayout(new GridLayout(2,1,5,5));
+	pal.setLayout(grid33);
+	for (int i=0;i<10;i++)
+	{
+	numbers[i]=String.valueOf(i);
+	}
+	for (int i = 0; i < numbers.length; i++)
+	{
+	buttons[i] = new JButton(numbers[i]); // create buttons
+	pal.add(buttons[i], grid33); // 在 panel 1內加入按鈕陣列
+	}
+	p.add(pal);
+	b0.addActionListener(new ActionListener(){
+	     public void actionPerformed(ActionEvent ae){
+	    	 String stringValue;
+	    	 int i,ran;
+	    	 String numbers[]  = new String[10];
+	    	 String j;
+	    	 for (i=0;i<10;i++)
+	    	 {
+	    	 numbers[i]=String.valueOf(i);
+	    	 }
+	    	 //上面迴圈是為了在numbers[ ] 裡面放進0~24的數字
+	    	 for (i=0; i<=9;i++)
+	    	 {
+	    	 ran=(int)(Math.random()*(10-i));   // 產生亂數
+	    	 buttons[i].setLabel(numbers[ran]);  // 根據亂數，把numbers[ ] 裡面的數字 讓buttons[ ] 標題改變
+	    	 //以下開始做對調
+	    	 j=numbers[ran];
+	    	 numbers[ran]=numbers[10-i-1];
+	    	 numbers[10-i-1]=j;
+	    	 }
+	    	 }
+	});
+	p.add(b0);
+	this.add(p, BorderLayout.CENTER);
+	
+ /*b0.setBounds(100,90,300,100);
  b1.setBounds(50,250,100,70);
  b2.setBounds(50,330,100,70);
  b3.setBounds(50,410,100,70);
@@ -128,7 +173,7 @@ private void initComp(){
  p14.setBounds(710,490,100,70);
  p15.setBounds(710,570,100,70);
  p16.setBounds(710,650,100,70);
-a1.setBounds(910,300,100,70);
+/*a1.setBounds(910,300,100,70);
  a2.setBounds(910,380,100,70);
  a3.setBounds(910,460,100,70);
  a4.setBounds(910,540,100,70);
@@ -137,9 +182,9 @@ a1.setBounds(910,300,100,70);
  a7.setBounds(1050,380,100,70);
  a8.setBounds(1050,460,100,70);
  a9.setBounds(1050,540,100,70);
- a10.setBounds(1050,620,100,70);
- Q1.setBounds(910,220,240,70);
- this.add(b0);
+ a10.setBounds(1050,620,100,70);*/
+// Q1.setBounds(910,220,240,70);
+/* this.add(b0);
  this.add(b1);
  this.add(b2);
  this.add(b3);
@@ -182,7 +227,7 @@ a1.setBounds(910,300,100,70);
  this.add(p14);
  this.add(p15);
  this.add(p16);
- this.add(a1);
+/* this.add(a1);
  this.add(a2);
  this.add(a3);
  this.add(a4);
@@ -191,9 +236,9 @@ a1.setBounds(910,300,100,70);
  this.add(a7);
  this.add(a8);
  this.add(a9);
- this.add(a10); 
- this.add(ta);
- this.add(Q1);
+ this.add(a10); */
+// this.add(ta);
+ //this.add(Q1);
  ta.setBounds(440,90,700,100);
  
  b1.addActionListener(new ActionListener(){
@@ -409,7 +454,7 @@ a1.setBounds(910,300,100,70);
     	 ta.append("{");
      }
     });
- a1.addActionListener(new ActionListener(){
+ /*a1.addActionListener(new ActionListener(){
      public void actionPerformed(ActionEvent ae){
     	 ta.append("0");
      }
@@ -458,7 +503,7 @@ a1.setBounds(910,300,100,70);
      public void actionPerformed(ActionEvent ae){
     	 ta.append("1");
      }
-     });
+     });*/
  Q1.addActionListener(new ActionListener(){
      public void actionPerformed(ActionEvent ae){
     	 ta.setText("");
